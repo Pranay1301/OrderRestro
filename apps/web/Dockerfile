@@ -25,7 +25,9 @@ RUN pnpm install --frozen-lockfile
 # and ARCHITECTURE.md's "reused from nodedr-pos" section for why a runtime
 # env silently falls back to the default instead).
 FROM deps AS builder
-ARG BACKEND_URL=http://backend:4000
+# Default points at this fork's public demo backend on Render; local
+# docker-compose overrides it with http://backend:4000 (see compose file).
+ARG BACKEND_URL=https://orderrestro-backend.onrender.com
 ENV BACKEND_URL=${BACKEND_URL}
 COPY packages/types packages/types
 COPY apps/web apps/web
