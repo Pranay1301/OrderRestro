@@ -60,6 +60,11 @@ sellers, busiest window, channel mix, plus a small fixed-intent Q&A
   (service, builder, Q&A parser, controller, 17 unit tests).
 - Web page: "Shift Brief" in the owner nav.
 
+> Note: upstream's CI configuration (`.github/workflows/`) is not included in
+> this fork's default branch (the publishing token lacks the `workflow` scope
+> GitHub requires for pushing workflow files). Tests are run locally instead -
+> see the verification note below.
+
 | Live brief | Q&A |
 |---|---|
 | ![Shift Brief with seeded demo data](docs/shift-brief/shift-brief-live.png) | ![Built-in Q&A answers](docs/shift-brief/shift-brief-qa.png) |
