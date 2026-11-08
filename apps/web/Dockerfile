@@ -39,6 +39,13 @@ FROM node:22-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Hosted PaaS (Render) routing: bind every interface on the platform-assigned
+# port. Next standalone defaults HOSTNAME to localhost in some versions, which
+# boots fine and then refuses every external connection (instant 502 at the
+# platform edge); Render injects PORT=10000, and server.js reads both vars.
+ENV HOSTNAME=0.0.0.0
+ENV PORT=10000
+
 # The standalone server (apps/web/server.js) resolves `public/` and
 # `.next/static` relative to ITS OWN traced monorepo path, i.e.
 # apps/web/public and apps/web/.next/static under this WORKDIR — not a
