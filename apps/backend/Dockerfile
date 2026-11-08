@@ -56,10 +56,11 @@ RUN apk add --no-cache curl \
        arm64) DARCH=aarch64 ;; \
        *) DARCH=$TARGETARCH ;; \
      esac \
-  && curl -fsSL --retry 3 --retry-delay 2 \
+  && (curl -fsSL --retry 3 --retry-delay 2 \
      "https://github.com/docker/compose/releases/download/v2.32.4/docker-compose-linux-${DARCH}" \
-     -o /docker-compose \
-  && chmod +x /docker-compose
+     -o /docker-compose && chmod +x /docker-compose \
+     || (echo 'WARNING: compose download failed (e.g. GitHub release outage); in-app self-update will be unavailable in this image' \
+         && printf '#!/bin/sh\necho "docker-compose unavailable in this image" >&2\nexit 1\n' > /docker-compose && chmod +x /docker-compose))
 
 # --- runtime: slim image, only what's needed to run ---
 # Keeps the SAME directory depth as the workspace (/repo/apps/backend, not a
