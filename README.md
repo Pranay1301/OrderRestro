@@ -71,6 +71,31 @@ sellers, busiest window, channel mix, plus a small fixed-intent Q&A
 
 Walkthrough video (40 s): [docs/shift-brief/walkthrough.mp4](docs/shift-brief/walkthrough.mp4)
 
+### Live demo (hosted, free tier)
+
+- **Web app:** https://orderrestro-web-5lqs.onrender.com
+- **API:** https://orderrestro-backend-r6gc.onrender.com/api/health
+- **Sign in as:** `visitor@demo.local` / `OrderDemo2026!`
+
+The visitor account uses a dedicated **Demo Visitor** role on the seeded
+demo restaurant. It can create and edit orders, accept orders, view tables
+and the menu, print bills, and read the sales dashboard and Shift Brief -
+it cannot touch owner settings, users, roles, inventory, or billing. That
+is intentional: the public demo lets you click through the POS floor and
+read the Shift Brief, while admin surfaces stay private.
+
+Honest limits of this demo:
+
+- Everything runs on free tiers (Render + Neon). Idle services **spin down**
+  and the first request after a quiet spell can take 30-60 seconds.
+- Self-registration is enabled upstream: registering creates **your own
+  separate restaurant tenant** (rate-limited), not access to the demo data.
+- Public QR/kiosk ordering is scoped to a table token - it can place orders
+  for that table only.
+- Shift Brief is **rule-based templates over POS data**, not an AI model -
+  the card footer names the generator (`deterministic-templates-v1`).
+- Demo data lives in a shared Postgres and may be reset without notice.
+
 Verified on 2026-11-08: 17/17 unit tests pass, backend (NestJS) and web
 (Next.js) builds pass, live stack (embedded Postgres + backend + web)
 checked end to end against the upstream demo seed. All upstream features,
