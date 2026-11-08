@@ -27,7 +27,7 @@ RUN pnpm install --frozen-lockfile
 FROM deps AS builder
 # Default points at this fork's public demo backend on Render; local
 # docker-compose overrides it with http://backend:4000 (see compose file).
-ARG BACKEND_URL=https://orderrestro-backend.onrender.com
+ARG BACKEND_URL=https://orderrestro-backend-r6gc.onrender.com
 ENV BACKEND_URL=${BACKEND_URL}
 COPY packages/types packages/types
 COPY apps/web apps/web
